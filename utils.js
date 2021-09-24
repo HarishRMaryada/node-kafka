@@ -238,4 +238,51 @@ const users = [
     }
   ]
 
-module.exports = {kafkaConfig,users}
+
+  const topicMessages = [
+    {
+      topic: "user-1",
+      messages: [{ key: "key", value: JSON.stringify(users[0]) }],
+    },
+    {
+      topic: "user-2",
+      messages: [{ key: "key", value: JSON.stringify(users[1]) }],
+    },
+    {
+      topic: "user-3",
+      messages: [{ key: "key", value: JSON.stringify(users[2]) }],
+    },
+    {
+      topic: "user-4",
+      messages: [{ key: "key", value: JSON.stringify(users[3]) }],
+    },
+    {
+      topic: "user-5",
+      messages: [{ key: "key", value: JSON.stringify(users[4]) }],
+    },
+    {
+      topic: "user-6",
+      messages: [{ key: "key", value: JSON.stringify(users[5]) }],
+    },
+    {
+      topic: "user-7",
+      messages: [{ key: "key", value: JSON.stringify(users[6]) }],
+    },
+    {
+      topic: "user-8",
+      messages: [{ key: "key", value: JSON.stringify(users[7]) }],
+    },
+    {
+      topic: "user-9",
+      messages: [{ key: "key", value: JSON.stringify(users[8]) }],
+    },
+    {
+      topic: "user-10",
+      messages: [{ key: "key", value: JSON.stringify(users[9]) }],
+    },
+    {
+      topic: "users",
+      messages: [{ key: "key", value: JSON.stringify(users) }],
+    },
+];
+module.exports = {kafkaConfig, topicMessages}

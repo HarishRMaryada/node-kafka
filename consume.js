@@ -1,15 +1,9 @@
 const { Kafka } = require("kafkajs");
-const clientId = "my-app";
-const brokers = ["localhost:9092"];
+const {kafkaConfig} = require("./utils")
 
-const kafka = new Kafka({
-  clientId,
-  brokers,
-  // logCreator: customLogger,
-  // logLevel: logLevel.DEBUG,
-});
+const kafka = new Kafka(kafkaConfig);
 const consumer = kafka.consumer({
-  groupId: clientId,
+  groupId: "my-app",
   minBytes: 5,
   maxBytes: 1e6,
   // wait for at most 3 seconds before receiving new data
