@@ -51,7 +51,6 @@ const getUsersById = async (res,id) => {
         console.log(
           "Message received ###############################################################################"
         );
-        console.log(message);
         res.send(JSON.parse(message.value));
       },
     });

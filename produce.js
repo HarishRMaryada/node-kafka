@@ -38,16 +38,6 @@ const produce = async () => {
       ],
     });
 
-    // const topics = []
-
-    // users.forEach(element => {
-    //     let topicMessage = {}
-    //     topicMessage.topic = `user-${element.id}`
-    //     topicMessage.messages = [{  key: `topic-${element.id}`,value: JSON.stringify(users[element.id])}];
-    //     topics.push(topicMessage)
-    // });
-    // await producer.sendBatch({ topics })
-
     const topicMessages = [
       {
         topic: "user-1",
