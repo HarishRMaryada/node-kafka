@@ -7,6 +7,9 @@ const producer = kafka.producer({});
 
 // we define an async function that writes a new message each second
 const produce = async () => {
+    const admin = kafka.admin()
+    await admin.connect()
+    await admin.disconnect()
   await producer.connect();
   try {
     await producer.sendBatch({ topicMessages });
