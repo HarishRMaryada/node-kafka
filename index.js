@@ -13,16 +13,22 @@ app.get('/users', async (req, res) => {
 
     getUsers(res).catch(err => {
         console.error("Error in consumer: ", err)
+        res.send("error")
     })
 })
 
 app.get('/users/:id', async (req, res) => {
-  //res.send(fs.readFileSync(path.join(__dirname,'topic_message.txt'), 'utf8'))
-  const {id} = req.params
-  getUsersById(res,id).catch(err => {
-      console.error("Error in consumer: ", err)
-  })
+    //res.send(fs.readFileSync(path.join(__dirname,'topic_message.txt'), 'utf8'))
+    let id = req.params.id
+    getUsersById(res,id).catch(err => {
+        console.error("Error in consumer: ", err)
+        res.send("error")
+    })
 })
+
+
+
+
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

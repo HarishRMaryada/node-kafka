@@ -1,5 +1,5 @@
 const { Kafka } = require("kafkajs");
-const {kafkaConfig} = require("./utils")
+const { kafkaConfig } = require("./utils");
 
 const kafka = new Kafka(kafkaConfig);
 const consumer = kafka.consumer({
@@ -19,11 +19,8 @@ const getUsers = async (res) => {
   });
   await consumer.run({
     // this function is called every time the consumer gets a new message
-    eachMessage: ({ message }) => {
-      console.log(
-        "Message received ###############################################################################"
-      );
-      res.send(JSON.parse(message.value));
+    eachMessage: async ({ message }) => {
+      await res.send(JSON.parse(message.value));
     },
   });
 
@@ -32,27 +29,30 @@ const getUsers = async (res) => {
   }, 2000);
 };
 
-const getUsersById = async (res,id) => {
-    const topic = `user-${id}`;
-    await consumer.connect();
-    await consumer.subscribe({
-      topic,
-      fromBeginning: true,
-    });
-    await consumer.run({
-      // this function is called every time the consumer gets a new message
-      eachMessage: ({ message }) => {
-        console.log(
-          "Message received ###############################################################################"
-        );
-        res.send(JSON.parse(message.value));
-      },
-    });
-  
-    setTimeout(async () => {
-      await consumer.disconnect();
-    }, 2000);
-  };
-  
+
+
+const getUsersById = async (res, id) => {
+  const topic = "user-" + id;
+  await consumer.connect();
+  await consumer.subscribe({
+    topic,
+    fromBeginning: true,
+  });
+  let dataVal; 
+  const collectData = async(data)=>{
+    dataVal =  await data
+  }
+  await consumer.run({
+    // this function is called every time the consumer gets a new message
+    eachMessage: async({ message }) => {
+      await collectData(message.value)
+     // await res.send(JSON.parse(message.value));
+    },
+  });
+ 
+  setTimeout(async () => {
+    await consumer.disconnect();
+  }, 2000);
+};
 
 module.exports = { getUsers, getUsersById };
